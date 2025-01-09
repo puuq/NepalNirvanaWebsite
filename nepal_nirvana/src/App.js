@@ -2,7 +2,7 @@ import react from "react";
 import axios from "axios";
 import './App.css';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 import About from './About';
 import Contact from "./Contact";
@@ -11,7 +11,7 @@ import Home from './home';
 import Explore from './Explore';
 import FAQs from "./FAQs";
 import Feedback from "./Feedback";
-import landingPage from "./landingPage";
+import LandingPage from "./LandingPage";
 import Login_Signup from "./Login-Signup";
 import Seller from "./Seller";
 import FooterSection from "./FooterSection";
@@ -38,7 +38,7 @@ function App() {
         <div className="routeLabel">
           <HeaderSection />
           <Routes>
-            <Route path="/" element={<landingPage data={data} />} />
+            <Route path="/" element={<LandingPage data={data} />} />
             <Route path="/About" element={<About />}></Route>
             <Route path="/Contact" element={<Contact />}></Route>
             <Route path="/Explore" element={<Explore />}></Route>
