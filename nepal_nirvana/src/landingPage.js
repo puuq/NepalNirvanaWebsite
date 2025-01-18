@@ -1,41 +1,91 @@
 import React from "react";
-import reactDom from "react-dom";
-import axios from "axios";
+import Slider from "react-slick";
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 import './App.css';
-import {useEffect, useState } from "react";
+
 
 import { useAuth } from "./AuthContext";
 
 const LandingPage = () => {
 
-    const { authState, login, logout } = useAuth();
+  const sliderSettings = {
+    dots: false,        //enables navigation dots
+    infinite: true,    //loops the slides
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 3000,  //autoslide after every 3 seconds
+    prevArrow: <div className="slick-prev">{"<"}</div>, // Custom prev button
+    nextArrow: <div className="slick-next">{">"}</div>, // Custom next button
+  };
+
+  //image data with descriptions
+
+  const images = [
+    {
+      src: '/images/dhaka topis.jpeg',
+      alt: 'Dhaka Topi',
+      description: 'dhaka topis',
+      link : '/explore',
+    },
+    
+    {
+      src : '/images/shawls.jpg',
+      alt: 'shawls',
+      decription:'shawls',
+    },
+
+    {
+      src: '/images/handicrafts.jpg',
+      alt: 'handicrafts',
+      description: 'crafts',
+      link : '/',
+    },
+
+    {
+      src: '/images/mud items.jpg',
+      alt: 'mud items',
+      description: '',
+      link : '/',
+    },
+
+    {
+      src: '/images/statues.jpg',
+      alt: 'statues',
+      description: '',
+      link : '/',
+    },
+
+  ];
+
+  const handleImageClick = (link) => {
+    // Navigate to the link or show more details
+    window.location.href = link; // Example: Redirects to another page
+  };
 
     return (
         <div className="landingPage">
-      <h1>Welcome to Nepal Nirvana</h1>
-      <p>Explore the best of Nepal's heritage and culture.</p>
+          <h1>Welcome to Nepal Nirvana</h1>
+          <p>Explore the best of Nepal's heritage and culture.</p>
 
-      {!authState.isAuthenticated ? (
-        <div>
-          <button onClick={() => login("user", { name: "John Doe" })}>
-            Sign In / Register as User
-          </button>
-          <button onClick={() => login("seller", { name: "Seller XYZ" })}>
-            Sign In / Register as Seller
-          </button>
-        </div>
-      ) : authState.role === "user" ? (
-        <div>
-          <p>Welcome, {authState.user.name}</p>
-          <button onClick={logout}>Logout</button>
-        </div>
-      ) : (
-        <div>
-          <p>Seller Panel</p>
-          <p>Welcome, {authState.user.name}</p>
-          <button onClick={logout}>Logout</button>
-        </div>
-      )}
+          <div className="slidingImages">
+            <Slider {...sliderSettings}>
+              {images.map((image, index) => (
+                <div key={index} onClick={() => handleImageClick(image.link)}>
+                  <img
+                    src={image.src}
+                    alt={image.alt}
+                    
+                  />
+                
+                </div>
+            ))}
+            </Slider>
+          </div>
+
+      
     </div>
     );
 };

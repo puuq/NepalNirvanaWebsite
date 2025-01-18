@@ -329,21 +329,81 @@
 
 
 .landingPage {
+
   text-align: center;
-  margin-top: 50px;
+  margin-top: 6px;
+  max-width: 100%;
 }
 
-button {
-  margin: 10px;
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
+
+.slidingImages img{
+
+  display: block;
+  margin: 0 auto;
+  max-width: 40%;
+  height: auto; /* Maintains aspect ratio */
+  object-fit: contain; /* Ensures images fit well inside the container */
+
 }
 
-button:hover {
-  background-color: #ddd;
+
+/* Custom styling for the slick carousel container */
+.landingPage .slidingImages {
+  position: relative;
+  overflow: hidden; /* Ensures no overflow of content */
 }
 
-p {
-  font-size: 18px;
+/* Custom previous and next arrows */
+.slick-prev, .slick-next {
+  position: absolute;
+  top: 50%; /* Vertically center the arrows */
+  transform: translateY(-50%); /* Adjust for true vertical centering */
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  color: white; /* Arrow color */
+  font-size: 30px; /* Size of the arrows */
+  padding: 10px;
+  z-index: 1;
+}
+
+.slick-prev {
+  left: 10px; /* Position the previous button on the left */
+}
+
+.slick-next {
+  right: 10px; /* Position the next button on the right */
+}
+
+/* Custom styling for the slick carousel dots */
+.slick-dots {
+  position: absolute;
+  bottom: 15px; /* Adjust this to fine-tune the vertical placement */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2; /* Ensure it's on top of the images */
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.slick-dots li {
+  margin: 0 5px; /* Optional, to space out the dots */
+}
+
+.slick-dots li button {
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  width: 12px;
+  height: 12px;
+  padding: 0; /* Remove padding to make sure the button is circular */
+  border: none; /* Remove default border */
+}
+
+.slick-dots li.slick-active button {
+  background-color: rgba(255, 255, 255, 1); /* Active dot color */
+}
+
+.slick-dots li button:hover {
+  background-color: rgba(255, 255, 255, 0.8); /* Hover effect */
 }
