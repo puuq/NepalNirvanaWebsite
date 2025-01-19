@@ -1,6 +1,7 @@
 *{
     margin: 0;
     padding: 0;
+    /* border: 1px solid red; */
 }
 
 .container {
@@ -345,4 +346,97 @@
   object-fit: contain; /* Ensures images fit well inside the container */
 
 }
+
+
+
+.loginContainer {
+  display: grid;
+  text-align: center;
+  line-height: 30px;
+  margin-top: 40px;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.loginForm {
+  margin: 30px;
+  padding: 10px;
+  line-height: 50px;
+  border: 1px solid black;
+  width: 40vw;
+
+}
+
+.loginForm .loginContent input{
+  font-size: 20px;
+  padding: 5px;
+  border-radius: 5px;
+  width: 90%;
+}
+
+.loginForm .loginContent button {
+  font-size: 20px;
+  padding: 5px;
+  border-radius: 5px;
+  width: 30%;
+}
+
+
+.loginMoreContent p{
+  font-size: 20px;
+}
+
+.loginMoreContent button{
+  width: 35vw;
+  font-size: 25px;
+  text-decoration: none;
+  border-radius: 5px;
+  padding: 8px;
+}
+
+.registrationContainer{
+  display: grid;
+  text-align: center;
+  margin-top: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+.registrationForm {
+  margin-top: 10px;
+  line-height: 33px;
+  border: 1px solid black;
+  width: 40vw;
+}
+
+.registrationForm .registerHead{
+  font-size: 20px;
+  font-weight: bolder;
+  text-align: left;
+  margin-left: 20px;
+}
+
+ .registrationForm .registerContent input{
+  font-size: 15px;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid grey;
+  width: 90%;
+ }
+
+ .registrationForm .registerContent p{
+  font-size: 20px;
+  font-weight: bold;
+ }
+
+ .registrationForm .registerContent button {
+  width: 15vw;
+  font-size: 15px;
+  text-decoration: none;
+  border-radius: 5px;
+  padding: 8px;
+  margin: 10px;
+ }
+
 

@@ -25,7 +25,7 @@ const LandingPage = () => {
 
   const images = [
     {
-      src: '/images/dhaka topis.jpeg',
+      src: 'C:\Users\Kamala Rai Danuwar\NepalNirvana\frontend\public\images\dhaka topis.jpeg',
       alt: 'Dhaka Topi',
       description: 'dhaka topis',
       link : '/explore',

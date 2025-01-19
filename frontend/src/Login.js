@@ -27,39 +27,52 @@ const Login = () => {
 
     return (
         <div>
-            <div className="loginForm">
-                <h2>Login</h2>
-                <form onSubmit={handleLogin}>
-                    <input
-                        type="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        placeholder="Enter Your Email Address"
+            <div className="loginContainer">
 
-                    ></input>
+                <div className="headerLogo">NepalNirvana</div>
 
-                    <input
-                        type="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        placeholder="Enter Password"
-                    ></input>
+                <div className="loginForm">
+                    <form onSubmit={handleLogin}>
+                        <div className="loginContent">
+                            <input
+                                type="email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                placeholder="Enter Your Email Address / Phone Number"
 
-                    <button
-                        type="submit"
-                    >
-                        
-                            Login
-                        
+                            ></input>
+                        </div>
+
+                        <div className="loginContent">
+                            <input
+                                type="password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                placeholder="Enter Password"
+                            ></input>
+                        </div>
+
+                        <div className="loginContent">
+                            <button
+                                type="submit"
+                                className="registerButton"
+                            >
+                                
+                                    Login
+                                
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <div className="loginMoreContent">
+                    <p>New to NepalNirvana?</p>
+                    <button>
+                        <Link to="/Registration">
+                            Create NepalNirvana Account
+                        </Link>
                     </button>
-                </form>
-
-                <p>New to NepalNirvana</p>
-                <button>
-                    <Link to="/Registration">
-                        Create NepalNirvana Account
-                    </Link>
-                </button>
+                </div>
             </div>
         </div>
     );

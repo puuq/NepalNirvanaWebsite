@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
 import './App.css';
+import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleExclamation } from "@fortawesome/free-solid-svg-icons";
 
 const Registration = () => {
     const [formData, setFormData] = useState ({
@@ -28,43 +31,93 @@ const Registration = () => {
 
     return (
         <div>
-            <div className="registrationForm">
-                <h2> Register</h2>
+            <div className="registrationContainer">
+                <div className="headerLogo">NepalNirvana</div>
 
-                <form onSubmit={handleRegister}>
-                    <input
-                        type="text"
-                        name="name"
-                        placeholder="Enter Your Name"
-                        value={formData.name}
-                        onChange={handleChange}
-                    ></input>
+                <div className="registrationForm">
+                    <div className="registerHead">Create Account</div>
+                    <form onSubmit={handleRegister}>
+                        <div className="registerContent">
+                            <p>Your Name</p>
+                            <input
+                                type="text"
+                                name="name"
+                                placeholder="Enter Your Name"
+                                value={formData.name}
+                                onChange={handleChange}
+                            ></input>
+                        </div>
 
-                    <input
-                        type="email"
-                        name="email"
-                        placeholder="Enter Your Email"
-                        value={formData.email}
-                        onChange={handleChange}
-                    ></input>
+                        <div className="registerContent">
+                            <p>Mobile Number or Email</p>
+                            <input
+                                type="email"
+                                name="email"
+                                placeholder="Enter Your Email Address"
+                                value={formData.email}
+                                onChange={handleChange}
+                            ></input>
+                        </div>
 
-                    <input
-                        type="password"
-                        name="password"
-                        placeholder="Enter the password"
-                        value={formData.password}
-                        onChange={handleChange}
-                    ></input>
+                        <div className="registerContent">
+                            <p>Password</p>
+                            <input
+                                type="password"
+                                name="password"
+                                placeholder="At least 6 characters"
+                                value={formData.password}
+                                onChange={handleChange}
+                            ></input>
+                        </div>
 
-                    <textarea
-                        name="address"
-                        placeholder="Enter Your Current Address"
-                        value={formData.address}
-                        onChange={handleChange}
-                    ></textarea>
+                        <div className="registerContent">
+                            <p>Re-enter Password</p>
+                            <input
+                                type="password"
+                                name="password"
+                                value={formData.password}
+                                onChange={handleChange}
+                            ></input>
+                            <div >
+                            <p style={{fontWeight: "normal", fontSize: "12px"}}><FontAwesomeIcon icon={faCircleExclamation} /> Password must be 6-16 characters long, at least 1 uppercase letter,1 lowercase letter,1 digit, and 1 special character. </p>
+                            </div>
+                        </div>
 
-                    <button type="submit">Register</button>
-                </form>
+                        <div className="registerContent">
+                            <input
+                                name="address"
+                                placeholder="Enter Your Current Address"
+                                value={formData.address}
+                                onChange={handleChange}
+                            ></input>
+                        </div>
+
+                        <div className="registerContent">
+                            <button type="submit" className="registerButton">Register</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div className="registerInfo" style={{marginTop: "15px"}}>
+                    <p style={{marginTop: "25px"}}>By creating an Account, you agree to NepalNirvana's <Link>Terms and Conditions</Link> and <Link>Privacy Policy.</Link></p>
+                </div>
+
+            
+                <hr style={{borderTop: "2px solid black", marginTop: "10px"}}></hr>
+
+                <div className="registerInfo" >
+                    <p style={{marginTop: "25px", fontSize: "18px", fontWeight: "bold"}}>Become a Seller</p>
+                    <Link style={{fontSize: "18px"}}>Create a Free Busines Account</Link>
+                </div>
+
+                <hr style={{borderTop: "2px solid black", marginTop: "10px"}}></hr>
+
+                <div className="registerInfo">
+                    <p style={{marginTop: "25px", fontSize: "18px", color: "black", fontWeight: "bold" }}>Already have an Account?</p>
+                    <Link to="/Login" style={{fontSize: "18px"}}>Sign in</Link>
+                </div>
+
+                <hr style={{borderTop: "2px solid black", marginTop: "10px"}}></hr>
             </div>
         </div>
     );
