@@ -1,7 +1,7 @@
 import react from "react";
 import axios from "axios";
 import './App.css';
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, useLocation } from "react-router-dom";
 import { createContext, useEffect, useState } from "react";
 
 import About from './About';
@@ -11,34 +11,28 @@ import Home from './home';
 import Explore from './Explore';
 import FAQs from "./FAQs";
 import Feedback from "./Feedback";
+import FooterSection from "./FooterSection";
 import LandingPage from "./LandingPage";
 import Login from "./Login";
+import Registration from "./Registration";
 import Seller from "./Seller";
-import FooterSection from "./FooterSection";
+
 
 
 function App() {
 
-  const [data, setData] = useState('');
+  const location = useLocation();  //access current route
 
-  useEffect(() => {
-    axios.get('http://127.0.0.1:5000/api/data')  
-      .then(response => {
-        console.log(response.data);
-        setData(response.data.message);
-      })
-      .catch(error => {
-        console.error('Error fetching data:', error);
-      });
-  }, []);
+  //exclude header and footer on specific routes
+  const hideHeaderFooter = ["/Login", "/Registration"].includes(location.pathname);
 
   return (
     <div>
-      <Router>
+      
         <div className="routeLabel">
-          <HeaderSection />
+          {!hideHeaderFooter && <HeaderSection />}   {/*render header if not on Login and Registration */}
           <Routes>
-            <Route path="/" element={<LandingPage data={data} />} />
+            <Route path="/" element={<LandingPage />} />
             <Route path="/About" element={<About />}></Route>
             <Route path="/Contact" element={<Contact />}></Route>
             <Route path="/Explore" element={<Explore />}></Route>
@@ -47,11 +41,12 @@ function App() {
             <Route path="/home" element={<Home />}></Route>
             <Route path="/Login" element={<Login />}></Route>
             <Route path="/Seller" element={<Seller />}></Route>
+            <Route path="/Registration" element={<Registration />}></Route>
           </Routes>
 
-          <FooterSection />
+          {!hideHeaderFooter && <FooterSection />}
         </div>
-      </Router>
+      
     </div>
   );
 };
