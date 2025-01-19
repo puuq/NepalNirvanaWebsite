@@ -3,8 +3,13 @@ import "./App.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faBarsStaggered } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
+import { useAuth } from "./AuthContext";
 
 const HeaderSection = () => {
+  const {user, logout} = useAuth();
+
+  console.log("User in HeaderSection:", user);
+  
   const selectRef = useRef(null);
 
   // State to handle multiple dropdowns
@@ -95,11 +100,22 @@ const HeaderSection = () => {
           </button>
         </div>
 
-        <div className="loginSignupLabel">
-          <Link to="/Login" className="loginSignupLink">
-            Login / Signup
-          </Link>
-        </div>
+        {/*conditionally render Login/signuo or profile*/}
+        {
+          user ? (
+            <div className="userProfle">
+              <span>Welcome, {user.name}</span>
+              <button onClick={logout}> Logout</button>
+            </div>
+          ) : (
+            <div className="loginSignupLabel">
+              <Link to="/Login" className="loginSignupLink">
+                Login / Signup
+               </Link>
+            </div>
+          )
+        }
+        
 
         <div className="sellerLabel">
           <Link href="#" className="sellerLink">
