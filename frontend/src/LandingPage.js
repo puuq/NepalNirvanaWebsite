@@ -66,27 +66,27 @@ const LandingPage = () => {
   };
 
     return (
-        <div className="landingPage">
-          <h1>Welcome to Nepal Nirvana</h1>
-          <p>Explore the best of Nepal's heritage and culture.</p>
+        <div>
+          <div className="landingPage">
+            <h1>Welcome to Nepal Nirvana</h1>
+            <p>Explore the best of Nepal's heritage and culture.</p>
 
-          <div className="slidingImages">
-            <Slider {...sliderSettings}>
-              {images.map((image, index) => (
-                <div key={index} onClick={() => handleImageClick(image.link)}>
-                  <img
-                    src={image.src}
-                    alt={image.alt}
-                    
-                  />
-                
-                </div>
-            ))}
-            </Slider>
+            <div className="slidingImages">
+              <Slider {...sliderSettings}>
+                {images.map((image, index) => (
+                  <div key={index} onClick={() => handleImageClick(image.link)}>
+                    <img
+                      src={image.src}
+                      alt={image.alt}
+                      
+                    />
+                  
+                  </div>
+              ))}
+              </Slider>
+            </div>
           </div>
-
-      
-    </div>
+        </div>
     );
 };
 

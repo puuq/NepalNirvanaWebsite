@@ -12,7 +12,7 @@ import Explore from './Explore';
 import FAQs from "./FAQs";
 import Feedback from "./Feedback";
 import LandingPage from "./LandingPage";
-import Login_Signup from "./Login-Signup";
+import Login from "./Login";
 import Seller from "./Seller";
 import FooterSection from "./FooterSection";
 
@@ -45,7 +45,7 @@ function App() {
             <Route path="/FAQs" element={<FAQs />}></Route>
             <Route path="/Feedback" element={<Feedback />}></Route>
             <Route path="/home" element={<Home />}></Route>
-            <Route path="/Login_Signup" element={<Login_Signup />}></Route>
+            <Route path="/Login" element={<Login />}></Route>
             <Route path="/Seller" element={<Seller />}></Route>
           </Routes>
 

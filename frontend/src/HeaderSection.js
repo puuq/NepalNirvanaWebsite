@@ -96,7 +96,7 @@ const HeaderSection = () => {
         </div>
 
         <div className="loginSignupLabel">
-          <Link href="#" className="loginSignupLink">
+          <Link to="/Login" className="loginSignupLink">
             Login / Signup
           </Link>
         </div>
