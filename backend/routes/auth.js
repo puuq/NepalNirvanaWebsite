@@ -35,12 +35,21 @@ router.post('/login', async (req, res) => {
   const { email, phone, password } = req.body;
 
   try {
+
+    //validate phone number length provided
+    if (emailOrPhone && !/^\d{10}$/.test(emailOrPhone)) {
+      return res.status(400).json({ message: 'Phone number must be exactly 10 digits.' });
+    }
+
+    //find user by email or phone
     const user = await User.findOne({ $or: [{ email: emailOrPhone }, { phone: emailOrPhone }] });
     if (!user) return res.status(400).json({ message: 'Invalid email/phone or password' });
 
+    //validate password
     const isMatch = await user.comparePassword(password);
     if (!isMatch) return res.status(400).json({ message: 'Invalid email/phone or password' });
 
+    //generate jwt token
     const token = jwt.sign({ id: user._id }, JWT_SECRET, { expiresIn: '1h' });
     res.json({ token, user: { id: user._id, name: user.name, email: user.email, phone: user.phone } });
   } catch (err) {

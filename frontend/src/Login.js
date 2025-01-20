@@ -14,6 +14,13 @@ const Login = () => {
 
     const handleLogin = async (e) => {
         e.preventDefault();
+
+        // Validate input for phone number length
+        if (!/^\d{10}$/.test(email)) {
+            alert('Phone number must be exactly 10 digits.');
+            return;
+        }
+
         try {
             const res = await axios.post('/api/auth/login', {
                 emailOrPhone: email,
