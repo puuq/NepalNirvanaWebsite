@@ -60,6 +60,18 @@ const Registration = () => {
                         </div>
 
                         <div className="registerContent">
+                            <p>Mobile Number</p>
+                            <input
+                                type="text"
+                                name="phone"
+                                placeholder="Enter Your Mobile Number"
+                                value={formData.phone}
+                                onChange={handleChange}
+                            ></input>
+                        </div>
+
+
+                        <div className="registerContent">
                             <p>Password</p>
                             <input
                                 type="password"

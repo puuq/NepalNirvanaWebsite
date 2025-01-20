@@ -8,13 +8,13 @@ const JWT_SECRET = 'your_super_secure_random_string!@#123'; // Replace with a se
 
 // Registration Route
 router.post('/register', async (req, res) => {
-  const { name, email, password, preferences, address } = req.body;
+  const { name, email, phone, password, preferences, address } = req.body;
 
   try {
     const userExists = await User.findOne({ email });
-    if (userExists) return res.status(400).json({ message: 'Email already exists' });
+    if (userExists) return res.status(400).json({ message: 'Email or Phone Number already exists' });
 
-    const newUser = new User({ name, email, password, preferences, address });
+    const newUser = new User({ name, email, phone, password, preferences, address });
     await newUser.save();
     res.status(201).json({ message: 'User registered successfully' });
   } catch (err) {
@@ -24,17 +24,17 @@ router.post('/register', async (req, res) => {
 
 // Login Route
 router.post('/login', async (req, res) => {
-  const { email, password } = req.body;
+  const { email, phone, password } = req.body;
 
   try {
-    const user = await User.findOne({ email });
-    if (!user) return res.status(400).json({ message: 'Invalid email or password' });
+    const user = await User.findOne({ $or: [{ email: emailOrPhone }, { phone: emailOrPhone }] });
+    if (!user) return res.status(400).json({ message: 'Invalid email/phone or password' });
 
     const isMatch = await user.comparePassword(password);
-    if (!isMatch) return res.status(400).json({ message: 'Invalid email or password' });
+    if (!isMatch) return res.status(400).json({ message: 'Invalid email/phone or password' });
 
     const token = jwt.sign({ id: user._id }, JWT_SECRET, { expiresIn: '1h' });
-    res.json({ token, user: { id: user._id, name: user.name, email: user.email } });
+    res.json({ token, user: { id: user._id, name: user.name, email: user.email, phone: user.phone } });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

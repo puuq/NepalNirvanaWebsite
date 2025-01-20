@@ -15,11 +15,14 @@ const Login = () => {
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.post('/api/auth/login', {email,password});
+            const res = await axios.post('/api/auth/login', {
+                emailOrPhone: email,
+                password});
             login(res.data.user);   //assuming API returns a user object
             alert('Login Successful');
             console.log('Token:', res.data.token);
             navigate("/LandingPage");
+
         } catch (err) {
             alert(err.response.data.message || 'Login Failed');
         }
@@ -35,7 +38,7 @@ const Login = () => {
                     <form onSubmit={handleLogin}>
                         <div className="loginContent">
                             <input
-                                type="email"
+                                type="text"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                                 placeholder="Enter Your Email Address / Phone Number"
@@ -50,6 +53,10 @@ const Login = () => {
                                 onChange={(e) => setPassword(e.target.value)}
                                 placeholder="Enter Password"
                             ></input>
+
+                            <div>
+                                <Link style={{marginTop: "0", textAlign: "right"}}>Forgot password?</Link>
+                            </div>
                         </div>
 
                         <div className="loginContent">
