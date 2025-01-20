@@ -11,9 +11,17 @@ router.post('/register', async (req, res) => {
   const { name, email, phone, password, preferences, address } = req.body;
 
   try {
-    const userExists = await User.findOne({ email });
+
+    //validate phone number length{ \d:only digits allowed, {10}:must be exactly 10 char, ^ $ : ensures length is exact}
+    if(!/^\d{10}$/.test(phone)) {
+      return res.status(400).json({message: 'Phone number must be exactly 10 digits.'});
+    } 
+
+    //check if user already exists
+    const userExists = await User.findOne({ $or: [{ email }, { phone }] });
     if (userExists) return res.status(400).json({ message: 'Email or Phone Number already exists' });
 
+    //save new user
     const newUser = new User({ name, email, phone, password, preferences, address });
     await newUser.save();
     res.status(201).json({ message: 'User registered successfully' });

@@ -21,6 +21,11 @@ const Registration = () => {
     const handleRegister = async (e) => {
         e.preventDefault();
 
+        if (formData.phone.length !==10) {
+            alert('Phone number must be exactly 10 digits.');
+            return;
+        }
+
         try {
             const res = await axios.post('/api/auth/register', formData);
             alert(res.data.message);
@@ -66,7 +71,13 @@ const Registration = () => {
                                 name="phone"
                                 placeholder="Enter Your Mobile Number"
                                 value={formData.phone}
-                                onChange={handleChange}
+                                onChange={ (e) => {
+                                    //allow only 10 digits and limit to 10 characters
+                                    const value = e.target.value;
+                                    if(/^\d{0,10}$/.test(value)) {
+                                        setFormData({ ...formData, phone: value});
+                                    }
+                                }}
                             ></input>
                         </div>
 
