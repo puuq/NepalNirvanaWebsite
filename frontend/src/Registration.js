@@ -9,7 +9,9 @@ const Registration = () => {
     const [formData, setFormData] = useState ({
      name: '',
      email: '',
+     phone: '',
      password: '',
+     confirmPassword: '',
      preferences: [],
      address: '',
     });
@@ -21,16 +23,26 @@ const Registration = () => {
     const handleRegister = async (e) => {
         e.preventDefault();
 
+        //validate phone number length
         if (formData.phone.length !==10) {
             alert('Phone number must be exactly 10 digits.');
             return;
         }
 
+        //validate password and confirm password match
+        if (formData.password !== formData.confirmPassword) {
+            alert('Passwords do not match.');
+            return;
+        }
+
         try {
-            const res = await axios.post('/api/auth/register', formData);
+            const res = await axios.post('/api/auth/register', {
+                ...formData,
+                confirmPassword: undefined, // Exclude confirmPassword from being sent to the server
+            });
             alert(res.data.message);
         } catch (err) {
-            alert(err.response.data.message || 'Connection to Database Failed');
+            alert(err.response?.data?.message || 'Connection to Database Failed');
         }
     };
 
@@ -97,10 +109,12 @@ const Registration = () => {
                             <p>Re-enter Password</p>
                             <input
                                 type="password"
-                                name="password"
-                                value={formData.password}
+                                name="confirmPassword"
+                                placeholder="Re-enter Password"
+                                value={formData.confirmPassword}
                                 onChange={handleChange}
                             ></input>
+                            
                             <div >
                             <p style={{fontWeight: "normal", fontSize: "12px"}}><FontAwesomeIcon icon={faCircleExclamation} /> Password must be 6-16 characters long, at least 1 uppercase letter,1 lowercase letter,1 digit, and 1 special character. </p>
                             </div>
