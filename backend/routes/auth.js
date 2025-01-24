@@ -32,30 +32,39 @@ router.post('/register', async (req, res) => {
 
 // Login Route
 router.post('/login', async (req, res) => {
-  const { email, phone, password } = req.body;
-
-  try {
-
-    //validate phone number length provided
-    if (emailOrPhone && !/^\d{10}$/.test(emailOrPhone)) {
-      return res.status(400).json({ message: 'Phone number must be exactly 10 digits.' });
+    const { emailOrPhone, password } = req.body;
+  
+    try {
+      let query = {};
+      if (/^\d{10}$/.test(emailOrPhone)) {
+        query.phone = emailOrPhone;
+      } else if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailOrPhone)) {
+        query.email = emailOrPhone;
+      } else {
+        return res.status(400).json({ message: 'Invalid email or phone number format.' });
+      }
+  
+      console.log('Query:', query); // Debugging
+  
+      const user = await User.findOne(query);
+      if (!user) {
+        console.log('No user found for:', emailOrPhone); // Debugging
+        return res.status(400).json({ message: 'Invalid email/phone or password' });
+      }
+  
+      const isMatch = await user.comparePassword(password);
+      console.log('Password check result:', isMatch); // Debugging
+  
+      if (!isMatch) return res.status(400).json({ message: 'Invalid email/phone or password' });
+  
+      const token = jwt.sign({ id: user._id }, JWT_SECRET, { expiresIn: '1h' });
+      res.json({ token, user: { id: user._id, name: user.name, email: user.email, phone: user.phone } });
+    } catch (err) {
+      res.status(500).json({ error: err.message });
     }
-
-    //find user by email or phone
-    const user = await User.findOne({ $or: [{ email: emailOrPhone }, { phone: emailOrPhone }] });
-    if (!user) return res.status(400).json({ message: 'Invalid email/phone or password' });
-
-    //validate password
-    const isMatch = await user.comparePassword(password);
-    if (!isMatch) return res.status(400).json({ message: 'Invalid email/phone or password' });
-
-    //generate jwt token
-    const token = jwt.sign({ id: user._id }, JWT_SECRET, { expiresIn: '1h' });
-    res.json({ token, user: { id: user._id, name: user.name, email: user.email, phone: user.phone } });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
+  });
+  
+  
 
 // Fetch User Profile
 router.get('/profile', async (req, res) => {

@@ -24,7 +24,7 @@ function App() {
   const location = useLocation();  //access current route
 
   //exclude header and footer on specific routes
-  const hideHeaderFooter = ["/Login", "/Registration"].includes(location.pathname);
+  const hideHeaderFooter = ["/Login", "/Registration", "/Seller"].includes(location.pathname);
 
   return (
     <div>

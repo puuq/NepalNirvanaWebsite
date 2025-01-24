@@ -395,10 +395,11 @@
   padding: 8px;
 }
 
+
 .registrationContainer{
   display: grid;
   text-align: center;
-  margin-top: 10px;
+  margin-top: 5pxpx;
   justify-content: center;
   align-items: center;
 }

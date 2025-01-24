@@ -118,7 +118,7 @@ const HeaderSection = () => {
         
 
         <div className="sellerLabel">
-          <Link href="#" className="sellerLink">
+          <Link to="/Seller" className="sellerLink">
             Become a Seller
           </Link>
         </div>

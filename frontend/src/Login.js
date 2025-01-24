@@ -14,27 +14,29 @@ const Login = () => {
 
     const handleLogin = async (e) => {
         e.preventDefault();
-
-        // Validate input for phone number length
-        if (!/^\d{10}$/.test(email)) {
-            alert('Phone number must be exactly 10 digits.');
-            return;
+      
+        // Validate email or phone input
+        if (!/^\d{10}$/.test(email) && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+          alert('Enter a valid email address or a 10-digit phone number.');
+          return;
         }
-
+      
         try {
-            const res = await axios.post('/api/auth/login', {
-                emailOrPhone: email,
-                password});
-            login(res.data.user);   //assuming API returns a user object
-            alert('Login Successful');
-            console.log('Token:', res.data.token);
-            navigate("/LandingPage");
-
+          const res = await axios.post('/api/auth/login', {
+            emailOrPhone: email,
+            password,
+          });
+      
+          login(res.data.user);
+          alert('Login Successful');
+          console.log('Token:', res.data.token);
+          navigate('/LandingPage');
         } catch (err) {
-            alert(err.response.data.message || 'Login Failed');
+          alert(err.response?.data?.message || 'Login Failed');
         }
-    };
-
+      };
+      
+      
     return (
         <div>
             <div className="loginContainer">
