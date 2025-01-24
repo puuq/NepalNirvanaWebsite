@@ -80,4 +80,43 @@ router.get('/profile', async (req, res) => {
   }
 });
 
+
+
+//to check if a user exists in db
+router.post('/check-user', async (req, res) => {
+    const { emailOrPhone } = req.body;
+  
+    try {
+      console.log('Received emailOrPhone:', emailOrPhone); // Log input
+  
+      // Determine whether it's an email or phone number
+      let query = {};
+      if (/^\d{10}$/.test(emailOrPhone)) {
+        query.phone = emailOrPhone; // Phone number
+      } else if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailOrPhone)) {
+        query.email = emailOrPhone; // Email
+      } else {
+        console.error('Invalid format:', emailOrPhone); // Log invalid format
+        return res.status(400).json({ message: 'Invalid email or phone number format.' });
+      }
+  
+      console.log('Query:', query); // Log query object
+  
+      // Check if user exists
+      const user = await User.findOne(query);
+      if (!user) {
+        console.error('User not found:', query); // Log if user is not found
+        return res.status(404).json({ message: 'User not found' });
+      }
+  
+      console.log('User exists:', user); // Log user details if found
+      res.status(200).json({ message: 'User exists' });
+    } catch (err) {
+      console.error('Server error:', err.message); // Log any server error
+      res.status(500).json({ error: 'Server error' });
+    }
+  });
+  
+  
+
 module.exports = router;

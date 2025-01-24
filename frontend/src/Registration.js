@@ -66,7 +66,7 @@ const Registration = () => {
                         </div>
 
                         <div className="registerContent">
-                            <p>Mobile Number or Email</p>
+                            <p>Email</p>
                             <input
                                 type="email"
                                 name="email"

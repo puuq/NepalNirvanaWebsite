@@ -84,10 +84,14 @@ const Login = () => {
                 <div className="loginMoreContent">
                     <p>New to NepalNirvana?</p>
                     <button>
-                        <Link to="/Registration">
+                        <Link to="\Registration">
                             Create NepalNirvana Account
                         </Link>
                     </button>
+                </div>
+
+                <div>
+                    <Link to="\LandingPage">Go back to NepalNirvana</Link>
                 </div>
             </div>
         </div>

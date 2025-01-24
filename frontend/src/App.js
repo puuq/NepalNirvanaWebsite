@@ -1,8 +1,8 @@
 import react from "react";
-import axios from "axios";
+
 import './App.css';
 import { BrowserRouter as Router, Route, Routes, useLocation } from "react-router-dom";
-import { createContext, useEffect, useState } from "react";
+
 
 import About from './About';
 import Contact from "./Contact";
@@ -16,6 +16,8 @@ import LandingPage from "./LandingPage";
 import Login from "./Login";
 import Registration from "./Registration";
 import Seller from "./Seller";
+import SellerDashboard from "./SellerDashboard";
+import SellerPassword from "./SellerPassword";
 
 
 
@@ -24,7 +26,7 @@ function App() {
   const location = useLocation();  //access current route
 
   //exclude header and footer on specific routes
-  const hideHeaderFooter = ["/Login", "/Registration", "/Seller"].includes(location.pathname);
+  const hideHeaderFooter = ["/Login", "/Registration", "/Seller", "/SellerPassword"].includes(location.pathname);
 
   return (
     <div>
@@ -41,6 +43,8 @@ function App() {
             <Route path="/home" element={<Home />}></Route>
             <Route path="/Login" element={<Login />}></Route>
             <Route path="/Seller" element={<Seller />}></Route>
+            <Route path="/SellerDashboard" element={<SellerDashboard />}></Route>
+            <Route path="/SellerPassword" element={<SellerPassword />}></Route>
             <Route path="/Registration" element={<Registration />}></Route>
           </Routes>
 
