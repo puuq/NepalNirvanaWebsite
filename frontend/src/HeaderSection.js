@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { useAuth } from "./AuthContext";
 
 const HeaderSection = () => {
-  const {user, logout} = useAuth();
+  const {user, isSeller, logout} = useAuth();
 
   console.log("User in HeaderSection:", user);
   
@@ -100,7 +100,7 @@ const HeaderSection = () => {
           </button>
         </div>
 
-        {/*conditionally render Login/signuo or profile*/}
+        {/*conditionally render Login/signup or profile*/}
         {
           user ? (
             <div className="userProfle">
@@ -115,13 +115,17 @@ const HeaderSection = () => {
             </div>
           )
         }
-        
 
-        <div className="sellerLabel">
-          <Link to="/Seller" className="sellerLink">
-            Become a Seller
-          </Link>
-        </div>
+        {
+          !isSeller && (
+            <div className="sellerLabel">
+             <Link to="/Seller" className="sellerLink">
+                Become a Seller
+             </Link>
+            </div>
+          )
+        }
+        
 
         {/* More Dropdown */}
         <div
