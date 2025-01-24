@@ -9,6 +9,8 @@ import { useAuth } from "./AuthContext";
 
 const LandingPage = () => {
 
+  const { user, isSeller } = useAuth();
+
   const sliderSettings = {
     dots: false,        //enables navigation dots
     infinite: true,    //loops the slides
@@ -68,6 +70,18 @@ const LandingPage = () => {
     return (
         <div>
           <div className="landingPage">
+
+            {/* conditionally render "upload an item" */}
+            {
+              isSeller && (
+                <div>
+                  <button>
+                    Upload an Item
+                  </button>
+                </div>
+              )
+            }
+
             <h1>Welcome to Nepal Nirvana</h1>
             <p>Explore the best of Nepal's heritage and culture.</p>
 

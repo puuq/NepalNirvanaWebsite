@@ -10,6 +10,11 @@ export const AuthProvider = ({ children }) => {
 
   const login = (userData) => {
     setUser(userData);
+    if (userData?.role === "seller") {
+      setIsSeller(true);
+    } else {
+      setIsSeller(false);
+    }
   };
 
   const logout = () => {
