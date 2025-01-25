@@ -5,7 +5,7 @@ import axios from "axios";
 import { useAuth } from "./AuthContext";
 
 const Login = () => {
-
+  
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const {login} = useAuth();
@@ -26,8 +26,10 @@ const Login = () => {
             emailOrPhone: email,
             password,
           });
+
+          const {token, user} = res.data;
       
-          login(res.data.user);
+          login(token, user); //store token and users
           alert('Login Successful');
           console.log('Token:', res.data.token);
           navigate('/LandingPage');

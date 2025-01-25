@@ -23,12 +23,16 @@ const SellerPassword = () => {
         if (res.status === 200) {
           alert("Validation Successful. You are now a seller!");
   
-          // Update global state
+          // Update global state and local storage
           login(res.data.user); // Assuming the response contains user info
           setIsSeller(true);
   
           navigate("/"); // Redirect to the landing page
         }
+
+        const {token, user} = res.data;
+        login (token, user);
+
       } catch (err) {
         setError(err.response?.data?.message || "Invalid credentials.");
       }

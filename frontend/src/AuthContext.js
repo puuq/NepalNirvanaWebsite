@@ -1,33 +1,54 @@
-import React, { createContext, useContext, useState } from "react";
+// AuthContext.js or equivalent
 
-// Create the AuthContext
+import { createContext, useContext, useState, useEffect } from "react";
+
+// Create context
 const AuthContext = createContext();
 
-// Provide the AuthContext
-export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null); // User info
-  const [isSeller, setIsSeller] = useState(false); // Whether the user is a seller
+export const useAuth = () => {
+  return useContext(AuthContext);
+};
 
-  const login = (userData) => {
-    setUser(userData);
-    if (userData?.role === "seller") {
-      setIsSeller(true);
-    } else {
-      setIsSeller(false);
+export const AuthProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
+  const [isSeller, setIsSeller] = useState(false);
+
+  // Load user and seller state from localStorage
+  useEffect(() => {
+    const savedUser = localStorage.getItem("user");
+    const savedIsSeller = localStorage.getItem("isSeller");
+
+    if (savedUser) {
+      setUser(JSON.parse(savedUser));
     }
+
+    if (savedIsSeller === "true") {
+      setIsSeller(true);
+    }
+  }, []);
+
+  const login = (token, user) => {
+    setUser(user);
+    localStorage.setItem("user", JSON.stringify(user));  // Save user data
+    localStorage.setItem("token", token);  // Save token
   };
 
   const logout = () => {
     setUser(null);
     setIsSeller(false);
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+    localStorage.removeItem("isSeller");
+  };
+
+  const setIsSellerState = (state) => {
+    setIsSeller(state);
+    localStorage.setItem("isSeller", state);
   };
 
   return (
-    <AuthContext.Provider value={{ user, isSeller, setIsSeller, login, logout }}>
+    <AuthContext.Provider value={{ user, isSeller, login, logout, setIsSeller: setIsSellerState }}>
       {children}
     </AuthContext.Provider>
   );
 };
-
-// Hook to use the AuthContext
-export const useAuth = () => useContext(AuthContext);
