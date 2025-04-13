@@ -3,6 +3,8 @@ import Slider from "react-slick";
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import './App.css';
+import { useNavigate } from "react-router-dom";
+
 
 import { useAuth } from "./AuthContext";
 import SellerDashboard from "./SellerDashboard";
@@ -10,6 +12,8 @@ import SellerDashboard from "./SellerDashboard";
 const LandingPage = () => {
   const { isSeller } = useAuth();
   const [showSellerDashboard, setShowSellerDashboard] = useState(false);
+  const navigate = useNavigate();
+
   const [items, setItems] = useState([
     {
       src: '/images/dhaka.jpeg',
@@ -138,6 +142,43 @@ const LandingPage = () => {
             ))}
           </div>
         </div>
+
+
+
+              <div className="featuresSection">
+        <h2>Why Choose Nepal Nirvana?</h2>
+        <div className="featureGrid">
+          <div className="featureCard">
+            <h3>Authentic Products</h3>
+            <p>Every item reflects Nepal's rich heritage, crafted by local artisans.</p>
+          </div>
+          <div className="featureCard">
+            <h3>Secure Shopping</h3>
+            <p>Shop with confidence using secure and trusted payment methods.</p>
+          </div>
+          <div className="featureCard">
+            <h3>Global Delivery</h3>
+            <p>We ship our culture to your doorstep, wherever you are in the world.</p>
+          </div>
+        </div>
+      </div>
+
+      <div className="categoryHighlight">
+        <h2>Shop by Category</h2>
+        <div className="categoryGrid">
+          <div className="categoryBox">Handicrafts</div>
+          <div className="categoryBox">Textiles</div>
+          <div className="categoryBox">Decor</div>
+          <div className="categoryBox">Statues</div>
+        </div>
+      </div>
+
+      <div className="ctaBanner">
+        <h2>Want to sell your Nepali products?</h2>
+        <p>Join our seller community and showcase your creativity.</p>
+        <button onClick={() => navigate("/Seller")}>Become a Seller</button>
+
+      </div>
 
         
       </div>

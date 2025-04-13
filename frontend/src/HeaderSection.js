@@ -150,10 +150,7 @@ const HeaderSection = () => {
             </div>
           )}
         </div>
-
-        <div className="changeLanguageLabel">
-          <a href="#">Change Language</a>
-        </div>
+ 
       </div>
 
       <div className="navBar" id="navBar">

@@ -9,10 +9,6 @@ const FooterSection = () => {
 
         <div className="footer">
 
-            <div className="footerBackToTop">
-                <p>Back To Top <FontAwesomeIcon icon={faArrowUp} /></p> 
-            </div>
-
             <div className="footerContainer">
                 
                 <div className="footerLogo">
