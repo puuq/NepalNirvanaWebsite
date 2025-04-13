@@ -265,67 +265,76 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 10px;
-  max-width: 100%;
-  margin-top: 20px;
-  position: relative;
-  font-size: 20px;
+  padding: 16px;
+  font-size: 18px;
   color: white;
   font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.footerBackToTop:hover {
+  background-color: rgb(45, 15, 130);
 }
 
 .footerContainer {
-  display: flex;
-  flex-direction: column;
-  padding: 5px;
   background-color: rgb(15, 1, 62);
-  max-width: 100%;
-  margin-bottom: 20px;
-  text-decoration: none;
+  padding: 40px 20px 20px;
+  width: 100%;
+  color: white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .footerLogo {
   color: gold;
-  font-size: 12px;
+  font-size: 24px;
   font-weight: bold;
   font-family: Georgia, 'Times New Roman', Times, serif;
-  margin-left: 20px;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 30px;
+  text-align: center;
 }
 
 .footerContent {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: row;
-  text-decoration: none;
-  gap: 150px;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-.footerContent .footerSection h3 {
+.footerSection {
+  flex: 1 1 200px;
+  min-width: 180px;
+}
+
+.footerSection h3 {
   color: whitesmoke;
-  margin-bottom: 10px;
-  font-size: 25px;
+  margin-bottom: 15px;
+  font-size: 20px;
+  border-bottom: 1px solid #666;
+  padding-bottom: 8px;
 }
 
-.footerContent .footerSection ul {
-  text-decoration: none;
+.footerSection ul {
   list-style: none;
-  margin-bottom: 10px;
-  line-height: 30px;
+  padding: 0;
+  margin: 0;
 }
 
-.footerContent .footerSection .footerLinks{
-  color: white;
+.footerLinks {
+  color: #ddd;
   text-decoration: none;
-  list-style: none;
- 
+  font-size: 16px;
+  display: block;
+  margin-bottom: 8px;
+  transition: color 0.2s ease;
 }
 
-.footerContent .footerSection .footerLinks:hover {
+.footerLinks:hover {
   color: aquamarine;
 }
+
 
 
 
@@ -342,103 +351,101 @@
   display: block;
   margin: 0 auto;
   max-width: 40%;
-  height: auto; /* Maintains aspect ratio */
-  object-fit: contain; /* Ensures images fit well inside the container */
+  height: 60vh;
+  object-fit: contain;
 
 }
 
 
 
-.loginContainer {
-  display: grid;
-  text-align: center;
-  line-height: 30px;
+.loginContainer,
+.registrationContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   margin-top: 40px;
-  justify-content: center;
-  align-items: center;
-
+  padding: 20px;
 }
 
-.loginForm {
-  margin: 30px;
-  padding: 10px;
-  line-height: 50px;
-  border: 1px solid black;
-  width: 40vw;
-
-}
-
-.loginForm .loginContent input{
-  font-size: 20px;
-  padding: 5px;
-  border-radius: 5px;
-  width: 90%;
-}
-
-.loginForm .loginContent button {
-  font-size: 20px;
-  padding: 5px;
-  border-radius: 5px;
-  width: 30%;
-}
-
-
-.loginMoreContent p{
-  font-size: 20px;
-}
-
-.loginMoreContent button{
-  width: 35vw;
-  font-size: 25px;
-  text-decoration: none;
-  border-radius: 5px;
-  padding: 8px;
-}
-
-
-.registrationContainer{
-  display: grid;
-  text-align: center;
-  margin-top: 5pxpx;
-  justify-content: center;
-  align-items: center;
-}
-
+.loginForm,
 .registrationForm {
-  margin-top: 10px;
-  line-height: 33px;
-  border: 1px solid black;
-  width: 40vw;
+  background-color: var(--accent-color);
+  padding: 30px 40px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  width: 100%;
+  max-width: 450px;
 }
 
-.registrationForm .registerHead{
-  font-size: 20px;
-  font-weight: bolder;
-  text-align: left;
-  margin-left: 20px;
+.loginForm .loginContent input,
+.registrationForm .registerContent input {
+  font-size: 16px;
+  padding: 12px;
+  border-radius: var(--border-radius);
+  border: 1px solid #ccc;
+  width: 100%;
+  margin: 8px 0;
+  box-sizing: border-box;
 }
 
- .registrationForm .registerContent input{
-  font-size: 15px;
-  padding: 5px;
-  border-radius: 5px;
-  border: 1px solid grey;
-  width: 90%;
- }
-
- .registrationForm .registerContent p{
+.loginForm .loginContent button,
+.registrationForm .registerContent button {
   font-size: 20px;
-  font-weight: bold;
- }
+  width: 50%;
+  background-color: var(--primary-color);
+  color: var(--accent-color);
+  border: 0px solid #ccc;
+  border-radius: 10px;
+  padding: 10px 16px;
+  margin: 10px 0;
+  margin-left: 25%;
+  background-color: #cdf2f8;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
 
- .registrationForm .registerContent button {
-  width: 15vw;
-  font-size: 15px;
+.loginForm .loginContent button:hover,
+.registrationForm .registerContent button:hover {
+  background-color: #357ab7;
+}
+
+.loginMoreContent p,
+.registrationForm .registerContent p {
+  font-size: 16px;
+  font-size: medium;
+}
+
+.loginMoreContent button {
+  font-size: 20px;
+  width: 100%;
+  background-color: var(--primary-color);
+  color: var(--accent-color);
+  border: 0px solid #ccc;
+  border-radius: 10px;
+  padding: 10px 16px;
+  margin: 10px 0;
+  background-color: #cdf2f8;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+}
+
+.loginMoreContent button a{
   text-decoration: none;
-  border-radius: 5px;
-  padding: 8px;
-  margin: 10px;
- }
+}
+
+.loginMoreContent button:hover {
+  background-color: #cbd2d9;
+}
+
+.registrationForm .registerHead {
+  font-size: 22px;
+  font-weight: bold;
+  text-align: left;
+  margin-bottom: 10px;
+  color: #333;
+}
 
 
 
@@ -495,3 +502,77 @@
   margin: 5px 0;
   font-size: 1rem;
 }
+
+
+.sellerContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 90vh;
+  padding: 30px;
+  background: linear-gradient(to bottom right, #f8f8f8, #e3f2fd);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.sellerContainer > div:first-child {
+  font-size: 36px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #1a237e;
+}
+
+.sellerContainer > div:nth-child(2) {
+  background-color: white;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: 450px;
+  text-align: center;
+}
+
+.sellerContainer p {
+  font-size: 18px;
+  margin: 10px 0;
+  color: #333;
+}
+
+.sellerContainer input {
+  width: 90%;
+  padding: 12px;
+  margin: 12px 0;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  transition: border 0.3s ease;
+}
+
+.sellerContainer input:focus {
+  outline: none;
+  border: 1px solid #1a73e8;
+}
+
+.sellerContainer button {
+  width: 95%;
+  background-color: #1a73e8;
+  color: white;
+  font-size: 18px;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+}
+
+.sellerContainer button:hover {
+  background-color: #1558c4;
+}
+
+.sellerContainer p[style*="red"] {
+  margin-top: -5px;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+

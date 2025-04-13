@@ -12,7 +12,7 @@ const LandingPage = () => {
   const [showSellerDashboard, setShowSellerDashboard] = useState(false);
   const [items, setItems] = useState([
     {
-      src: '/images/dhaka_topis.jpg',
+      src: '/images/dhaka.jpeg',
       alt: 'Dhaka Topi',
       description: 'Dhaka Topis',
       price: '',
@@ -36,7 +36,7 @@ const LandingPage = () => {
       link: '/',
     },
     {
-      src: '/images/mud_items.jpg',
+      src: '/images/mud.jpg',
       alt: 'Mud Items',
       description: 'Mud Items',
       price: '',

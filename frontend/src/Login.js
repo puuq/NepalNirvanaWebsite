@@ -1,103 +1,143 @@
 import React, { useState } from "react";
 import './App.css';
-import { Link , useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "./AuthContext";
 
 const Login = () => {
-  
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const {login} = useAuth();
+  const [isRegistering, setIsRegistering] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [fullName, setFullName] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const { login } = useAuth();
+  const navigate = useNavigate();
 
-    const navigate = useNavigate();
+  const handleLogin = async (e) => {
+    e.preventDefault();
 
-    const handleLogin = async (e) => {
-        e.preventDefault();
-      
-        // Validate email or phone input
-        if (!/^\d{10}$/.test(email) && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-          alert('Enter a valid email address or a 10-digit phone number.');
-          return;
-        }
-      
-        try {
-          const res = await axios.post('/api/auth/login', {
-            emailOrPhone: email,
-            password,
-          });
+    if (!/^\d{10}$/.test(email) && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      alert('Enter a valid email or 10-digit phone number.');
+      return;
+    }
 
-          const {token, user} = res.data;
-      
-          login(token, user); //store token and users
-          alert('Login Successful');
-          console.log('Token:', res.data.token);
-          navigate('/LandingPage');
-        } catch (err) {
-          alert(err.response?.data?.message || 'Login Failed');
-        }
-      };
-      
-      
-    return (
-        <div>
-            <div className="loginContainer">
+    try {
+      const res = await axios.post('/api/auth/login', {
+        emailOrPhone: email,
+        password,
+      });
 
-                <div className="headerLogo">NepalNirvana</div>
+      const { token, user } = res.data;
+      login(token, user);
+      alert('Login Successful');
+      navigate('/LandingPage');
+    } catch (err) {
+      alert(err.response?.data?.message || 'Login Failed');
+    }
+  };
 
-                <div className="loginForm">
-                    <form onSubmit={handleLogin}>
-                        <div className="loginContent">
-                            <input
-                                type="text"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                placeholder="Enter Your Email Address / Phone Number"
+  const handleRegister = async (e) => {
+    e.preventDefault();
 
-                            ></input>
-                        </div>
+    if (password !== confirmPassword) {
+      alert("Passwords do not match!");
+      return;
+    }
 
-                        <div className="loginContent">
-                            <input
-                                type="password"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                                placeholder="Enter Password"
-                            ></input>
+    try {
+      const res = await axios.post('/api/auth/register', {
+        fullName,
+        email,
+        password
+      });
 
-                            <div>
-                                <Link style={{marginTop: "0", textAlign: "right"}}>Forgot password?</Link>
-                            </div>
-                        </div>
+      alert("Registration Successful! Please log in.");
+      setIsRegistering(false);
+    } catch (err) {
+      alert(err.response?.data?.message || 'Registration Failed');
+    }
+  };
 
-                        <div className="loginContent">
-                            <button
-                                type="submit"
-                                className="registerButton"
-                            >
-                                
-                                    Login
-                                
-                            </button>
-                        </div>
-                    </form>
-                </div>
+  return (
+    <div className="loginContainer">
+      <div className="headerLogo">NepalNirvana</div>
 
-                <div className="loginMoreContent">
-                    <p>New to NepalNirvana?</p>
-                    <button>
-                        <Link to="\Registration">
-                            Create NepalNirvana Account
-                        </Link>
-                    </button>
-                </div>
-
-                <div>
-                    <Link to="\LandingPage">Go back to NepalNirvana</Link>
-                </div>
+      {!isRegistering ? (
+        <div className="loginForm">
+          <form onSubmit={handleLogin}>
+            <div className="loginContent">
+              <input
+                type="text"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Email Address / Phone Number"
+              />
             </div>
+
+            <div className="loginContent">
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Password"
+              />
+              <div>
+                <Link>Forgot password?</Link>
+              </div>
+            </div>
+
+            <div className="loginContent">
+              <button type="submit">Login</button>
+            </div>
+          </form>
+
+          <div className="loginMoreContent">
+            <p>New to NepalNirvana?</p>
+            <button onClick={() => setIsRegistering(true)}>Create NepalNirvana Account</button>
+          </div>
         </div>
-    );
+      ) : (
+        <div className="registrationForm">
+          <form onSubmit={handleRegister}>
+            <div className="registerHead">Register</div>
+            <div className="registerContent">
+              <input
+                type="text"
+                value={fullName}
+                onChange={(e) => setFullName(e.target.value)}
+                placeholder="Full Name"
+              />
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Email"
+              />
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Password"
+              />
+              <input
+                type="password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                placeholder="Confirm Password"
+              />
+              <button type="submit">Register</button>
+              <p>Already have an account?</p>
+              <button onClick={() => setIsRegistering(false)}>Back to Login</button>
+            </div>
+          </form>
+        </div>
+      )}
+
+      <div>
+        <Link to="/LandingPage">Go back to NepalNirvana</Link>
+      </div>
+    </div>
+  );
 };
 
 export default Login;
