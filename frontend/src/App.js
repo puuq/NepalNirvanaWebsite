@@ -32,7 +32,7 @@ function App() {
         <div className="routeLabel">
           {!hideHeaderFooter && <HeaderSection />}   {/*render header if not on Login and Registration */}
           <Routes>
-            <Route path="/" element={<LandingPage />} />
+            <Route path="/LandingPage" element={<LandingPage />} />
             <Route path="/About" element={<About />}></Route>
             <Route path="/Contact" element={<Contact />}></Route>
             <Route path="/Explore" element={<Explore />}></Route>
